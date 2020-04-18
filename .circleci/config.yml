@@ -1,6 +1,20 @@
 version: 2.1
 jobs:
-  build-and-test:
+  
+  Desarrollo:
+    docker:
+      - image: circleci/openjdk
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            -  "d5:ce:b1:38:a7:73:bd:47:80:51:ff:41:c1:fc:5a:fd"
+      - checkout
+      - run:
+          name: "Ejecucion"
+          command:
+            scp -o StrictHostKeyCheking=no index.html ubuntu@3.12.150.197:/var/www/html/index.html
+  
+  Produccion:
     docker:
       - image: circleci/openjdk
     steps:
@@ -14,11 +28,13 @@ jobs:
             scp -o StrictHostKeyCheking=no index.html ubuntu@18.217.39.119:/var/www/html/index.html
          
 workflows:
-  build-and-test:
+  build:
     jobs:
-      - build-and-test
-      - hold:
+      - Desarrollo
+      - request-testing:
           type: approval
           requieres:
-            - build-and-test
-
+            - Desarrollo
+      - Produccion:
+          requieres:
+            - request-testing
