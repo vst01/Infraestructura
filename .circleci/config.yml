@@ -11,7 +11,7 @@ jobs:
       - run:
           name: "Ejecucion"
           command:
-          scp -o StrictHostKeyCheking=no index.html ubuntu@18.217.39.119:/var/www/html/index.html
+            scp -o StrictHostKeyCheking=no index.html ubuntu@18.217.39.119:/var/www/html/index.html
          
 workflows:
   build-and-test:
