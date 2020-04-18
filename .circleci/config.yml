@@ -1,5 +1,4 @@
 jobs:
-  
   Desarrollo:
     docker:
       - image: circleci/openjdk
@@ -12,7 +11,6 @@ jobs:
           name: "Ejecucion"
           command:
             scp -o StrictHostKeyCheking=no index.html ubuntu@3.12.150.197:/var/www/html/index.html
-  
   Produccion:
     docker:
       - image: circleci/openjdk
@@ -35,6 +33,4 @@ workflows:
           type: approval
           requieres:
             - Desarrollo
-      - Produccion:
-          requieres:
-            - request-testing
+
