@@ -28,6 +28,7 @@ jobs:
             scp -o StrictHostKeyCheking=no index.html ubuntu@18.217.39.119:/var/www/html/index.html
          
 workflows:
+  version: 2
   build:
     jobs:
       - Desarrollo
