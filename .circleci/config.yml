@@ -3,17 +3,18 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  
   build-and-test:
     docker:
       - image: circleci/node:13.12
-    executor:
-      name: node/default
     steps:
+      - add_ssh_keys>
+          fingerprints:
+            -  d5:ce:b1:38:a7:73:bd:47:80:51:ff:41:c1:fc:5a:fd
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
+      - run:
+          name: "Ejecucion"
+          command:
+          scp -o StrictHostKeyCheking=no index.html ubuntu@18.217.39.119:/var/www/html/index.html
          
 workflows:
   build-and-test:
