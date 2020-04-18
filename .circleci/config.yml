@@ -33,4 +33,6 @@ workflows:
           type: approval
           requieres:
             - Desarrollo
-
+      - Produccion:
+          requieres:
+            - request-testing
